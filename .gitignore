@@ -1,0 +1,11 @@
+# Mac OS X files
+.DS_Store
+
+# Environment configuration
+.env
+
+# Azure Function files
+azure-playground-generator
+
+# Go files
+go.sum
