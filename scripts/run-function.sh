@@ -11,4 +11,5 @@ if [[ -f ".env" ]]; then
     export $(grep -v '^#' .env | xargs)
 fi
 
+cd $SCRIPT_DIR/../functions/
 func host start

@@ -2,7 +2,7 @@ define PROJECT_HELP_MSG
 Usage:
     make help               show this message
     make build              build the golang components of the function
-    make run				run the solution locally
+    make run                run the solution locally
 endef
 export PROJECT_HELP_MSG
 

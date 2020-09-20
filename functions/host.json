@@ -4,7 +4,7 @@
 		"id": "Microsoft.Azure.Functions.ExtensionBundle",
 		"version": "[1.*, 2.0.0)"
 	},
-	"customHandler": {	    
+	"customHandler": {
 		"description": {
 			"defaultExecutablePath": "azure-playground-generator"
 		},
