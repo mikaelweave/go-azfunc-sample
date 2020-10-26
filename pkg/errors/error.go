@@ -1,6 +1,9 @@
 package errors
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+)
 
 // Source:
 //https://github.com/Optum/dce/blob/82521f9b906194df4b69ea8e852d9b3f763e4c89/pkg/errors/error.go
@@ -41,5 +44,23 @@ func NewInternalServer(m string, err error) *StatusError {
 		httpCode: http.StatusInternalServerError,
 		cause:    err,
 		message:  m,
+	}
+}
+
+// NewAlreadyExists returns a new error representing an already exists error
+func NewAlreadyExists(name string) *StatusError {
+	return &StatusError{
+		httpCode: http.StatusConflict,
+		cause:    nil,
+		message:  fmt.Sprintf("%s already exists", name),
+	}
+}
+
+// NewNotFound returns an a NotFound error with standard messaging
+func NewNotFound(name string) *StatusError {
+	return &StatusError{
+		httpCode: http.StatusNotFound,
+		cause:    nil,
+		message:  fmt.Sprintf("%s not found", name),
 	}
 }

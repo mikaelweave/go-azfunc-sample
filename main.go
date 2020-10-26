@@ -18,7 +18,10 @@ func main() {
 
 	// Setup Server
 	mux := http.NewServeMux()
-	mux.HandleFunc("/HttpTriggerWithOutputs", api.HTTPTriggerHandler)
+	mux.HandleFunc("/playground-list", api.PlaygroundListHandler)
+	mux.HandleFunc("/playground-create", api.PlaygroundCreateHandler)
+	mux.HandleFunc("/playground-get", api.PlaygroundGetHandler)
+	mux.HandleFunc("/playground-delete", api.PlaygroundDeleteHandler)
 
 	// Start Server
 	fmt.Println("Go server Listening...on FUNCTIONS_CUSTOMHANDLER_PORT:", config.FunctionHTTPWorkerPort())
