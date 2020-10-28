@@ -28,29 +28,5 @@ func ParseEnvironment() error {
 		return fmt.Errorf("Expected env vars must be an integer: %s", err)
 	}
 
-	// clientID
-	clientID, err = envy.MustGet("AZURE_CLIENT_ID")
-	if err != nil {
-		return fmt.Errorf("Expected env vars not provided: %s", err)
-	}
-
-	// clientSecret
-	clientSecret, err = envy.MustGet("AZURE_CLIENT_SECRET")
-	if err != nil {
-		return fmt.Errorf("Expected env vars not provided: %s", err)
-	}
-
-	// tenantID (AAD)
-	tenantID, err = envy.MustGet("AZURE_TENANT_ID")
-	if err != nil {
-		return fmt.Errorf("Expected env vars not provided: %s", err)
-	}
-
-	// subscriptionID (ARM)
-	subscriptionID, err = envy.MustGet("AZURE_SUBSCRIPTION_ID")
-	if err != nil {
-		return fmt.Errorf("Expected env vars not provided: %s", err)
-	}
-
 	return nil
 }

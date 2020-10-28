@@ -1,11 +1,11 @@
 package playground
 
 import (
-	"azure-playground-generator/internal/auth"
 	"azure-playground-generator/internal/config"
 
 	"github.com/Azure/azure-sdk-for-go/profiles/latest/authorization/mgmt/authorization"
 	"github.com/Azure/azure-sdk-for-go/profiles/latest/resources/mgmt/resources"
+	"github.com/Azure/go-autorest/autorest/azure/auth"
 )
 
 func getResourceGroupsClient() (resources.GroupsClient, error) {
@@ -14,7 +14,7 @@ func getResourceGroupsClient() (resources.GroupsClient, error) {
 
 	groupsClient = resources.NewGroupsClient(config.SubscriptionID())
 	groupsClient.AddToUserAgent(config.UserAgent())
-	authorizer, err := auth.GetResourceManagementAuthorizer()
+	authorizer, err := auth.NewAuthorizerFromEnvironment()
 
 	if err == nil {
 		groupsClient.Authorizer = authorizer
@@ -25,10 +25,17 @@ func getResourceGroupsClient() (resources.GroupsClient, error) {
 }
 
 func getRoleAssignmentsClient() (authorization.RoleAssignmentsClient, error) {
-	roleClient := authorization.NewRoleAssignmentsClient(config.SubscriptionID())
+	var roleClient authorization.RoleAssignmentsClient
+	var err error
 
-	a, _ := auth.GetResourceManagementAuthorizer()
-	roleClient.Authorizer = a
+	roleClient = authorization.NewRoleAssignmentsClient(config.SubscriptionID())
 	roleClient.AddToUserAgent(config.UserAgent())
-	return roleClient, nil
+	authorizer, err := auth.NewAuthorizerFromEnvironment()
+
+	if err == nil {
+		roleClient.Authorizer = authorizer
+		return roleClient, nil
+	}
+
+	return roleClient, err
 }
