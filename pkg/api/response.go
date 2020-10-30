@@ -62,7 +62,7 @@ func WriteHTTPErrorResponse(w http.ResponseWriter, err error) {
 	// If custom error object
 	switch t := err.(type) {
 	case errors.HTTPCode:
-		WriteHTTPResponse(w, t.HTTPCode(), err)
+		WriteHTTPResponse(w, t.HTTPCode(), err.Error())
 		return
 	}
 
@@ -70,6 +70,6 @@ func WriteHTTPErrorResponse(w http.ResponseWriter, err error) {
 	WriteHTTPResponse(
 		w,
 		http.StatusInternalServerError,
-		errors.NewInternalServer("unknown error", err),
+		err.Error(),
 	)
 }
