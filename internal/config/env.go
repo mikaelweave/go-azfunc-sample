@@ -18,7 +18,6 @@ func ParseEnvironment() error {
 	var err error
 
 	// these must be provided by environment
-	//functionHTTPWorkerPort
 	functionHTTPWorkerPortString, err := envy.MustGet("FUNCTIONS_HTTPWORKER_PORT")
 	if err != nil {
 		return fmt.Errorf("Expected env vars not provided: %s", err)
@@ -26,6 +25,11 @@ func ParseEnvironment() error {
 	functionHTTPWorkerPort, err = strconv.Atoi(functionHTTPWorkerPortString)
 	if err != nil {
 		return fmt.Errorf("Expected env vars must be an integer: %s", err)
+	}
+
+	subscriptionID, err = envy.MustGet("AZURE_SUBSCRIPTION_ID")
+	if err != nil {
+		return fmt.Errorf("Expected env vars not provided: %s", err)
 	}
 
 	return nil
